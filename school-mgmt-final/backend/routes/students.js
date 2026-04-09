@@ -3,10 +3,10 @@ const Student = require('../models/Student');
 const { protect } = require('../middleware/auth');
 const router = express.Router();
 
-// All routes protected
+
 router.use(protect);
 
-// GET all students
+
 router.get('/', async (req, res) => {
   try {
     const students = await Student.find().sort({ createdAt: -1 });
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// POST create student
+
 router.post('/', async (req, res) => {
   const { name, rollNumber, class: studentClass, email, phone } = req.body;
   if (!name || !rollNumber || !studentClass) {
@@ -33,7 +33,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// PUT update student
+
 router.put('/:id', async (req, res) => {
   try {
     const student = await Student.findByIdAndUpdate(req.params.id, req.body, {
@@ -47,7 +47,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// DELETE student
+
 router.delete('/:id', async (req, res) => {
   try {
     const student = await Student.findByIdAndDelete(req.params.id);

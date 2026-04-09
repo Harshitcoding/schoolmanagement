@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.use(protect);
 
-// GET all tasks (with student populated)
+
 router.get('/', async (req, res) => {
   try {
     const tasks = await Task.find().populate('student', 'name rollNumber class').sort({ createdAt: -1 });
@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// POST create task
+
 router.post('/', async (req, res) => {
   const { title, description, student, dueDate, subject } = req.body;
   if (!title || !student) {
@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// PATCH toggle completion
+
 router.patch('/:id/toggle', async (req, res) => {
   try {
     const task = await Task.findById(req.params.id);
@@ -44,7 +44,7 @@ router.patch('/:id/toggle', async (req, res) => {
   }
 });
 
-// DELETE task
+
 router.delete('/:id', async (req, res) => {
   try {
     const task = await Task.findByIdAndDelete(req.params.id);

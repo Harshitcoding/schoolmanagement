@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const Admin = require('../models/Admin');
 const router = express.Router();
 
-// Seed admin if not exists
+
 const seedAdmin = async () => {
   const exists = await Admin.findOne({ email: process.env.ADMIN_EMAIL });
   if (!exists) {
@@ -17,7 +17,7 @@ const seedAdmin = async () => {
 };
 seedAdmin();
 
-// POST /api/auth/login
+
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
